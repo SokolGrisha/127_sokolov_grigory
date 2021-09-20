@@ -91,5 +91,6 @@ public class Lesson210914 {
         TaskDemo task = new TaskDemo();
         System.out.println(task.subtask1_if(10, 15));
         System.out.println(task.subtask2_switch(2));
+        System.out.println(task.Test());
     }
 }

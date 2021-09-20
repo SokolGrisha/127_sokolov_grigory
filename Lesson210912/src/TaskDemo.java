@@ -25,4 +25,8 @@ public class TaskDemo {
         }
         return result;
     }
+
+    public boolean Test(){
+        return !(1>1);
+    }
 }
