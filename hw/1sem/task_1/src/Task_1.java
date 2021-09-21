@@ -35,12 +35,10 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // ------------------------------------------------------------------------------------
         if (Math.abs(width-height)>0.000001)
             return 2;
-        else if (x>=left_up_x&&x<=(left_up_x+width)&&y>=left_up_y&&y<=(left_up_y+height))
-            return 1;
         else if (x>left_up_x&&x<(left_up_x+width)&&y>left_up_y&&y<(left_up_y+height))
-            return 0;
-        else
-            return 0;
+            return 1;
+        else return 0;//if (x>=left_up_x&&x<=(left_up_x+width)&&y>=left_up_y&&y<=(left_up_y+height)&&&&)
+
     }
     //@Override
     public int subtask_4_if(double x0, double y0, double k, double b) {
@@ -52,9 +50,9 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // 2 - лежит на прямой
         // Допустимой погрешностью при сравнении переменных типа double считать 0.000001
         // ------------------------------------------------------------------------------------
-        if (!(Math.abs((k*x0)-y0)>0.000001))
+        if (!(Math.abs(((k*x0)+b)-y0)>0.000001))
             return 2;
-        else if ((k*x0)>y0)
+        else if (((k*x0)+b)>y0)
             return 1;
         else
             return 0;
@@ -66,21 +64,29 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // вернуть строку "Ошибка"
         // ------------------------------------------------------------------------------------
         String result = "Ошибка";
-        switch (day_od_week){
+        switch (day_od_week) {
             case 1:
-                result="Понедельник";
+                result = "Понедельник";
+                break;
             case 2:
-                result="Вторник";
+                result = "Вторник";
+                break;
             case 3:
-                result="Среда";
+                result = "Среда";
+                break;
             case 4:
-                result="Четверг";
+                result = "Четверг";
+                break;
             case 5:
-                result="Пятница";
+                result = "Пятница";
+                break;
             case 6:
-                result="Суботта";
+                result = "Суботта";
+                break;
             case 7:
-                result="Воскресенье";
+                result = "Воскресенье";
+                break;
+
         }
         return result;
     }
@@ -97,12 +103,16 @@ public class Task_1 /*** implements Task_1_base ***/ {
         switch (direction){
             case 1:
                 result="север";
+                break;
             case 2:
                 result="юг";
+                break;
             case 3:
                 result="запад";
+                break;
             case 4:
                 result="восток";
+                break;
         }
         return result; // Замените данный оператор кодом, решающим поставленную задачу.
     }
@@ -116,7 +126,20 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // 2 - аргументы функции заданы некорректно
         // Допустимой погрешностью при сравнении переменных типа double считать 0.000001
         // ------------------------------------------------------------------------------------
-        return 0;
+        if (wall==0)
+            return 1;
+        if (vx==0||(vx==0&&vz==0&&vy==0))
+            return 2;
+        if (speed==0||time==0)
+            return 0;
+        double k = wall/vx;
+        double wy = vy*k;
+        double wz = vz*k;
+        double l = Math.sqrt(Math.pow(wall,2)+Math.pow(wy,2)+Math.pow(wz,2));
+        if (!(Math.abs(l-(speed*time))>0.000001))
+            return 1;
+        else
+            return 0;
     }
     //@Override
     public int subtask_8_if(double k1, double b1, double k2, double b2) {
