@@ -33,10 +33,12 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // 2 - аргументы функции заданы некорректно
         // Допустимой погрешностью при сравнении переменных типа double считать 0.000001 ??
         // ------------------------------------------------------------------------------------
-        if (x>left_up_x&&x<(left_up_x+width)&&y>left_up_y&&y<(left_up_y-height))
-            return 1;
-        else if (!(Math.abs(x - left_up_x)>0.000001) || !(Math.abs(y - left_up_y)>0.000001))
+        if (Math.abs(width-height)>0.000001)
             return 2;
+        else if (x>=left_up_x&&x<=(left_up_x+width)&&y>=left_up_y&&y<=(left_up_y+height))
+            return 1;
+        else if (x>left_up_x&&x<(left_up_x+width)&&y>left_up_y&&y<(left_up_y+height))
+            return 0;
         else
             return 0;
     }
@@ -114,7 +116,7 @@ public class Task_1 /*** implements Task_1_base ***/ {
         // 2 - аргументы функции заданы некорректно
         // Допустимой погрешностью при сравнении переменных типа double считать 0.000001
         // ------------------------------------------------------------------------------------
-        return 0; // Замените данный оператор кодом, решающим поставленную задачу.
+        return 0;
     }
     //@Override
     public int subtask_8_if(double k1, double b1, double k2, double b2) {
