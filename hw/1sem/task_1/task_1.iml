@@ -13,7 +13,11 @@
           <root url="jar://$MODULE_DIR$/lib/Task_1.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/Task_1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/Task_1.jar!/META-INF" />
+          <root url="jar://$MODULE_DIR$/lib/Task_1.jar!/META-INF" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
