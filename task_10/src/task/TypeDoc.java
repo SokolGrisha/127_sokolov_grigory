@@ -1,6 +1,10 @@
 package task;
 
-public class TypeDoc {
-    PayDoc,
-    BanckDoc
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public enum TypeDoc {
+    PaymentsDoc,
+    BankDoc
 }
