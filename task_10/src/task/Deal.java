@@ -7,7 +7,9 @@ import java.util.List;
 public class Deal {
     private String date;
     private String number;
-    private TypeDoc type;
     private HashMap<Integer, PayDoc> paydoc;
-
+    public  Deal(String date, String number){
+        this.date = date;
+        this.number = number;
+    }
 }

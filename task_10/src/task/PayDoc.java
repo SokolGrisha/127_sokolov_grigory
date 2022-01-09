@@ -8,5 +8,5 @@ public class PayDoc {
     private int income;
     private int number;
     private String date;
-
+    private TypeDoc type;
 }
