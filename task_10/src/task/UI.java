@@ -114,7 +114,7 @@ public class UI {
                     break;
                 case "7":
                     print("Номер платежа | Дата платежа | Тип платежа | Сумма патежа(коп.) ");
-                    for (PayDoc doc : deals.list_of_docs()) {
+                    for (PayDoc doc : deals.list_of_all_docs()) {
                         print( doc.getNumber() +  " | " + doc.getDate() + " | " + type(doc.getType()) + " | "+ doc.getIncome());
                     }
                     break;

@@ -41,6 +41,13 @@ public class MangerOfDeals {
             throw new Exception("Ошибка договор с таким номером не существует");
         }
     }
+    public List<PayDoc> list_of_all_docs() {
+        List<PayDoc> list = new ArrayList();
+        for (String deal : list_of_numbers_deals()) {
+            list.addAll(deals.get(deal).list_of_docs());
+        }
+        return list;
+    }
     public int getSum(String number) throws Exception{
         if(deals.containsKey(number)) {
             return deals.get(number).getSum();
