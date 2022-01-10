@@ -1,23 +1,11 @@
 package task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+public record PayDoc(int income, int number, String date, TypeDoc type) {
 
-public class PayDoc {
-    private int income;
-    private int number;
-    private String date;
-    private TypeDoc type;
-    public PayDoc(int income,int number,String date,TypeDoc type){
-        this.income=income;
-        this.number=number;
-        this.date=date;
-        this.type=type;
-    }
-    public int getIncome(){
+    public int getIncome() {
         return income;
     }
+
     public String getDate() {
         return date;
     }
@@ -26,7 +14,7 @@ public class PayDoc {
         return number;
     }
 
-    public TypeDoc getType(){
+    public TypeDoc getType() {
         return type;
     }
 }

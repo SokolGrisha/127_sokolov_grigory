@@ -17,15 +17,12 @@ public class Deal {
             pay_doc.put(number, new PayDoc(income, number, date, type));
         }
         else{
-            //TODO выдать ошибку
             throw new Exception("Ошибка договор уже есть");
         }
     }
     public List<PayDoc> list_of_docs() {
         List<PayDoc> list = new ArrayList();
-        for(PayDoc pay : pay_doc.values()){
-            list.add(pay);
-        }
+        list.addAll(pay_doc.values());
         return list;
     }
     public int getSum(){
@@ -43,7 +40,6 @@ public class Deal {
             pay_doc.remove(num);
         }
         else{
-            // TODO выдать ошибку
             throw new Exception("Ошибка нет такого платежа");
         }
     }

@@ -26,10 +26,6 @@ public class Task_10 {
         Scanner scan = new Scanner(System.in);
         return scan.next();
     }
-    public static String input(){
-        Scanner scan = new Scanner(System.in);
-        return scan.next();
-    }
     public static void main(String[] args) {
         HashMap<String, Deal> deals;
         deals = new HashMap<>();
@@ -49,12 +45,12 @@ public class Task_10 {
                     }
                     break;
                 case 2:
-                    String numofdeal = get("Введите номер договора:");
-                    if(deals.containsKey(numofdeal)) {
-                        int numofdoc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(!deals.get(numofdeal).exists_of_doc(numofdoc)) {
+                    String number_of_deal = get("Введите номер договора:");
+                    if(deals.containsKey(number_of_deal)) {
+                        int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
+                        if(!deals.get(number_of_deal).exists_of_doc(number_of_doc)) {
                             int income = Integer.parseInt(get("Сумма платежа(в коп.):"));
-                            if (income > 0 && income != 0) {
+                            if (income > 0) {
                                 String date = get("Дата платежа:");
                                 //TODO Сделать проверку по заданию
                                 print("Выберите тип платежа:");
@@ -63,7 +59,7 @@ public class Task_10 {
                                 switch (Integer.parseInt(get("Тип:"))) {
                                     case 1:
                                         try {
-                                            deals.get(numofdeal).create_pay_doc(income, numofdoc, date, PaymentsDoc);
+                                            deals.get(number_of_deal).create_pay_doc(income, number_of_doc, date, PaymentsDoc);
                                         }
                                         catch (Exception e){
                                             print(e.getMessage());
@@ -71,7 +67,7 @@ public class Task_10 {
                                         break;
                                     case 2:
                                         try {
-                                            deals.get(numofdeal).create_pay_doc(income, numofdoc, date, BankDoc);
+                                            deals.get(number_of_deal).create_pay_doc(income, number_of_doc, date, BankDoc);
                                         }
                                         catch (Exception e){
                                             print(e.getMessage());
@@ -107,7 +103,7 @@ public class Task_10 {
                 case 4:
                     String num4 = get("Введите номер договора:");
                     if(deals.containsKey(num4)) {
-                        print("Сумма платежей по договору(коп.):"+String.valueOf(deals.get(num4).getSum()));
+                        print("Сумма платежей по договору(коп.):"+deals.get(num4).getSum());
                     }
                     else{
                         print("Нет такого договора");
@@ -116,11 +112,11 @@ public class Task_10 {
                 case 5:
                     String num5 = get("Введите номер договора:");
                     if(deals.containsKey(num5)) {
-                        int numofdoc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(deals.get(num5).exists_of_doc(numofdoc)){
+                        int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
+                        if(deals.get(num5).exists_of_doc(number_of_doc)){
                             String date = get("Введите номер платежа:");
                             try {
-                                deals.get(num5).delete_doc(numofdoc, date);
+                                deals.get(num5).delete_doc(number_of_doc, date);
                             }
                             catch (Exception e){
                                 print(e.getMessage());
