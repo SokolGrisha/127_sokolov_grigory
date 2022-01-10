@@ -18,4 +18,15 @@ public class PayDoc {
     public int getIncome(){
         return income;
     }
+    public String getDate() {
+        return date;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public TypeDoc getType(){
+        return type;
+    }
 }

@@ -10,28 +10,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Task_10 {
-    public  static void createPayDocs(Deal deals,TypeDoc type){
-        get("Введите номер договора:");
-        if(Objects.equals(type,PaymentsDoc)){
-            print("Введите номер поручения:");
-        }
-        else{
-            print("Введите номер ордера:");
-        }
-        String numofdoc = input();
-
-    }
     public static void commands(){
         System.out.println("Список Команд:");
         System.out.println("1. Создать Договр");
-        System.out.println("2. Создать Платежное поручение");
-        System.out.println("3. Создать Банковский ордер");
-        System.out.println("4. Найти платежи по номеру договора");
-        System.out.println("5. Сумма всех платежей по номеру договора");
-        System.out.println("6. Удалить платёж");
-        System.out.println("7. Список всех договоров и сумма платежей по ним");
-        System.out.println("8. Список Всех платежей");
-        System.out.println("9. Повторить список команд");
+        System.out.println("2. Создать Платежное поручение или Банковский ордер");
+        System.out.println("3. Найти платежи по номеру договора");
+        System.out.println("4. Сумма всех платежей по номеру договора");
+        System.out.println("5. Удалить платёж");
+        System.out.println("6. Список всех договоров и сумма платежей по ним");
+        System.out.println("7. Список Всех платежей");
+        System.out.println("8. Повторить список команд");
     }
     public static void print(String a){
         System.out.println(a);
@@ -64,13 +52,59 @@ public class Task_10 {
                     }
                     break;
                 case 2:
-                    print("Введите номер договора:");
+                    String numofdeal = get("Введите номер договора:");
+                    if(deals.containsKey(numofdeal)) {
+                        int numofdoc = Integer.parseInt(get("Введите номер платежа:"));
+                        if(!deals.get(numofdeal).listofdocs().containsKey(numofdoc)) {
+                            int income = Integer.parseInt(get("Сумма платежа(в коп.):"));
+                            if (income > 0 && income != 0) {
+                                String date = get("Дата платежа:");
+                                //TODO Сделать проверку по заданию
+                                print("Выберите тип платежа:");
+                                print("1.Платежное поручение");
+                                print("2.Банковский ордер");
+                                switch (Integer.parseInt(get("Тип:"))) {
+                                    case 1:
+                                        deals.get(numofdeal).createpaydoc(income, numofdoc, date, PaymentsDoc);
+                                        break;
+                                    case 2:
+                                        deals.get(numofdeal).createpaydoc(income, numofdoc, date, BankDoc);
+                                        break;
+                                }
+                            }
+                            else{
+                                print("Неверная сумма платежа");
+                            }
+                        }
+                            else{
+                                print("Такой договор уже существует");
+                            }
+                    }
+                    else{
+                        print("!!! Такого договра не существует");
+                    }
                     break;
                 case 3:
-                    print("Введите номер договора:");
+                    String num3 = get("Введите номер договора:");
+                    if(deals.containsKey(num3)) {
+                        print("Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
+                        for (PayDoc doc : deals.get(num3).listofdocs()) {
+                            print(doc.getDate()+" | "+doc..getType()+" | "+doc.getNumber()+" | "+doc.getIncome());
+
+                        }
+                    }
+                    else{
+                        print("Нет такого договора");
+                    }
                     break;
                 case 4:
-                    print("Введите номер договора:");
+                    String num4 = get("Введите номер договора:");
+                    if(deals.containsKey(num4)) {
+                        print("Сумма платежей по договору(коп.):"+String.valueOf(deals.get(num4).getSum()));
+                    }
+                    else{
+                        print("Нет такого договора");
+                    }
                     break;
                 case 5:
                     print("Введите номер договора:");
@@ -82,10 +116,10 @@ public class Task_10 {
                     print("Введите номер договора:");
                     break;
                 case 8:
-                    print("Введите номер договора:");
-                    break;
-                case 9:
                     commands();
+                    break;
+                default:
+                    print("Ошибка ввода");
                     break;
             }
         }
