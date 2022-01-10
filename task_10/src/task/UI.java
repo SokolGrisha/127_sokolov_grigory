@@ -6,7 +6,15 @@ import java.util.Scanner;
 
 import static task.TypeDoc.*;
 
-public class Task_10 {
+public class UI {
+    public static String type(TypeDoc type){
+        if(type==PaymentsDoc){
+            return "Платежное поручение";
+        }
+        else{
+            return "Банковский ордер";
+        }
+    }
     public static void commands(){
         System.out.println("Список Команд:");
         System.out.println("1. Создать Договр");
@@ -31,8 +39,8 @@ public class Task_10 {
         deals = new HashMap<>();
         commands();
         while (true) {
-            switch (Integer.parseInt(get("Введите номер команды:"))) {
-                case 1:
+            switch (get("Введите номер команды (8 - повторить список команд):")) {
+                case "1":
                     String num = get("Введите номер договора:");
                     if(!deals.containsKey(num)) {
                         String date = get("Введите дату заключения договора:");
@@ -47,22 +55,21 @@ public class Task_10 {
                     else{
                         //TODO придумать как поместить в класс?
                         print("!!! Ошибка !!!");
-                        print("Договор с таким номером уже создан или номер договора не введен");
+                        print("Договор с таким номером уже создан или номер договора введен некорректно");
                     }
                     break;
-                case 2:
+                case "2":
                     String number_of_deal = get("Введите номер договора:");
                     if(deals.containsKey(number_of_deal)) {
                         int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(!deals.get(number_of_deal).exists_of_doc(number_of_doc)) {
-                            int income = Integer.parseInt(get("Сумма платежа(в коп.):"));
+                            int income = Integer.parseInt(get("Сумма платежа(коп.):"));
                             if (income > 0) {
                                 String date = get("Дата платежа:");
                                 print("Выберите тип платежа:");
                                 print("1.Платежное поручение");
                                 print("2.Банковский ордер");
-                                switch (Integer.parseInt(get("Тип:"))) {
-                                    case 1:
+                                switch (get("Тип:")) {
+                                    case "1":
                                         try {
                                             deals.get(number_of_deal).create_pay_doc(income, number_of_doc, date, PaymentsDoc);
                                         }
@@ -70,7 +77,7 @@ public class Task_10 {
                                             print(e.getMessage());
                                         }
                                         break;
-                                    case 2:
+                                    case "2":
                                         try {
                                             deals.get(number_of_deal).create_pay_doc(income, number_of_doc, date, BankDoc);
                                         }
@@ -78,26 +85,25 @@ public class Task_10 {
                                             print(e.getMessage());
                                         }
                                         break;
+                                    default:
+                                        print("Ошибка ввода");
+                                        break;
                                 }
                             }
                             else{
                                 print("Неверная сумма платежа");
-                            }
-                        }
-                            else{
-                                print("Такой договор уже существует");
                             }
                     }
                     else{
                         print("!!! Такого договра не существует");
                     }
                     break;
-                case 3:
+                case "3":
                     String num3 = get("Введите номер договора:");
-                    if(deals.containsKey(num3)) {
+                    if(deals.containsKey(num3)&&!deals.get(num3).list_of_docs().isEmpty()) {
                         print("Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
                         for (PayDoc doc : deals.get(num3).list_of_docs()) {
-                            print(doc.getDate()+" | "+doc.getType()+" | "+doc.getNumber()+" | "+doc.getIncome());
+                            print(doc.getDate()+" | "+type(doc.getType())+" | "+doc.getNumber()+" | "+doc.getIncome());
 
                         }
                     }
@@ -105,7 +111,7 @@ public class Task_10 {
                         print("Нет такого договора");
                     }
                     break;
-                case 4:
+                case "4":
                     String num4 = get("Введите номер договора:");
                     if(deals.containsKey(num4)) {
                         print("Сумма платежей по договору(коп.):"+deals.get(num4).getSum());
@@ -114,12 +120,11 @@ public class Task_10 {
                         print("Нет такого договора");
                     }
                     break;
-                case 5:
+                case "5":
                     String num5 = get("Введите номер договора:");
                     if(deals.containsKey(num5)) {
                         int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(deals.get(num5).exists_of_doc(number_of_doc)){
-                            String date = get("Введите номер платежа:");
+                            String date = get("Введите дату платежа:");
                             try {
                                 deals.get(num5).delete_doc(number_of_doc, date);
                             }
@@ -127,31 +132,29 @@ public class Task_10 {
                                 print(e.getMessage());
                             }
                             print("Платеж удален");
-                        }
-                        else{
-                            print("Нет такого платежа");
-                        }
                     }
                     else{
                         print("Нет такого договора");
                     }
                     break;
-                case 6:
-                    print("Номер договора | Сумма платежей по договору");
+                case "6":
+                    print("Номер договора | Сумма платежей по договору(коп)");
                     for(String deal : deals.keySet()){
                         print(deal+" | "+deals.get(deal).getSum());
                     }
                     break;
-                case 7:
+                case "7":
                     for(String deal : deals.keySet()){
-                        print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                        for (PayDoc doc : deals.get(deal).list_of_docs()) {
-                            print(deal+" | "+doc.getDate()+" | "+doc.getType()+" | "+doc.getNumber()+" | "+doc.getIncome());
+                        if(!deals.get(deal).list_of_docs().isEmpty()) {
+                            print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
+                            for (PayDoc doc : deals.get(deal).list_of_docs()) {
+                                print(deal + " | " + doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
 
+                            }
                         }
                     }
                     break;
-                case 8:
+                case "8":
                     commands();
                     break;
                 default:
