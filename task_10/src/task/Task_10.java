@@ -52,7 +52,7 @@ public class Task_10 {
                     String numofdeal = get("Введите номер договора:");
                     if(deals.containsKey(numofdeal)) {
                         int numofdoc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(!deals.get(numofdeal).exsistofdoc(numofdoc)) {
+                        if(!deals.get(numofdeal).exists_of_doc(numofdoc)) {
                             int income = Integer.parseInt(get("Сумма платежа(в коп.):"));
                             if (income > 0 && income != 0) {
                                 String date = get("Дата платежа:");
@@ -62,10 +62,20 @@ public class Task_10 {
                                 print("2.Банковский ордер");
                                 switch (Integer.parseInt(get("Тип:"))) {
                                     case 1:
-                                        deals.get(numofdeal).createpaydoc(income, numofdoc, date, PaymentsDoc);
+                                        try {
+                                            deals.get(numofdeal).create_pay_doc(income, numofdoc, date, PaymentsDoc);
+                                        }
+                                        catch (Exception e){
+                                            print(e.getMessage());
+                                        }
                                         break;
                                     case 2:
-                                        deals.get(numofdeal).createpaydoc(income, numofdoc, date, BankDoc);
+                                        try {
+                                            deals.get(numofdeal).create_pay_doc(income, numofdoc, date, BankDoc);
+                                        }
+                                        catch (Exception e){
+                                            print(e.getMessage());
+                                        }
                                         break;
                                 }
                             }
@@ -85,7 +95,7 @@ public class Task_10 {
                     String num3 = get("Введите номер договора:");
                     if(deals.containsKey(num3)) {
                         print("Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                        for (PayDoc doc : deals.get(num3).listofdocs()) {
+                        for (PayDoc doc : deals.get(num3).list_of_docs()) {
                             print(doc.getDate()+" | "+doc.getType()+" | "+doc.getNumber()+" | "+doc.getIncome());
 
                         }
@@ -107,9 +117,14 @@ public class Task_10 {
                     String num5 = get("Введите номер договора:");
                     if(deals.containsKey(num5)) {
                         int numofdoc = Integer.parseInt(get("Введите номер платежа:"));
-                        if(deals.get(num5).exsistofdoc(numofdoc)){
+                        if(deals.get(num5).exists_of_doc(numofdoc)){
                             String date = get("Введите номер платежа:");
-                            deals.get(num5).deletedoc(numofdoc,date);
+                            try {
+                                deals.get(num5).delete_doc(numofdoc, date);
+                            }
+                            catch (Exception e){
+                                print(e.getMessage());
+                            }
                             print("Платеж удален");
                         }
                         else{
@@ -129,7 +144,7 @@ public class Task_10 {
                 case 7:
                     for(String deal : deals.keySet()){
                         print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                        for (PayDoc doc : deals.get(deal).listofdocs()) {
+                        for (PayDoc doc : deals.get(deal).list_of_docs()) {
                             print(deal+" | "+doc.getDate()+" | "+doc.getType()+" | "+doc.getNumber()+" | "+doc.getIncome());
 
                         }
