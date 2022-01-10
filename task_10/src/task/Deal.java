@@ -17,7 +17,7 @@ public class Deal {
     }
     public List<Integer> listofdocs() {
         List<Integer> list = new ArrayList();
-        for(PaymentDocument paymentDoc : paymentDocuments.values()){
+        for(PayDoc pay : paymentDocuments.values()){
             payments.add(paymentDoc.getSum());
         }
         return paydoc;
