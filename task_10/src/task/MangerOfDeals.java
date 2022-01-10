@@ -13,11 +13,11 @@ public class MangerOfDeals {
             if (!Objects.equals(number, "") && !Objects.equals(date, "")) {
                 deals.put(number, new Deal(date, number));
             } else {
-                throw new Exception("Ошибка неверный номер договора");
+                throw new Exception("Ошибка попытка добавить договор с пустым номером");
             }
         }
         else{
-            throw new Exception("Ошибка договор с таким номером уже создан");
+            throw new Exception("Ошибка попытка добавить договор с уже существующим номером");
         }
     }
     public void create_pay_doc(String number_of_deal, int income, int number, String date, TypeDoc type) throws Exception {
@@ -59,7 +59,7 @@ public class MangerOfDeals {
             }
         }
         else{
-            throw new Exception("Ошибка договор с таким номером не существует");
+            throw new Exception("Ошибка попытка удалить несуществующий платеж");
         }
     }
     public Set<String> list_of_numbers_deals(){

@@ -15,11 +15,15 @@ public class Deal {
             pay_doc = new HashMap<>();
     }
     public void create_pay_doc(int income, int number, String date, TypeDoc type) throws Exception {
-        if(!(exists_of_doc(number)&& pay_doc.get(number).getType()==type&& Objects.equals(pay_doc.get(number).getDate(), date))&&income>0){
-            pay_doc.put(number, new PayDoc(income, number, date, type));
+        if(income>0) {
+            if (!(exists_of_doc(number) && pay_doc.get(number).getType() == type && Objects.equals(pay_doc.get(number).getDate(), date))) {
+                pay_doc.put(number, new PayDoc(income, number, date, type));
+            } else {
+                throw new Exception("Ошибка попытка добавить уже существующий платеж");
+            }
         }
-        else{
-            throw new Exception("Ошибка договор уже есть или сумма платежа введена некоректно");
+        else {
+            throw new Exception("Ошибка отрицательная или нулевая сумма платежа");
         }
     }
     public List<PayDoc> list_of_docs() {

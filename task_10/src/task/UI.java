@@ -113,14 +113,9 @@ public class UI {
                     }
                     break;
                 case "7":
-                    for (String deal : deals.list_of_numbers_deals()) {
-                        if (!deals.isEmpty(deal)) {
-                            print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                            for (PayDoc doc : deals.list_of_docs(deal)) {
-                                print(deal + " | " + doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
-
-                            }
-                        }
+                    print("Номер платежа | Дата платежа | Тип платежа | Сумма патежа(коп.) ");
+                    for (PayDoc doc : deals.list_of_docs()) {
+                        print( doc.getNumber() +  " | " + doc.getDate() + " | " + type(doc.getType()) + " | "+ doc.getIncome());
                     }
                     break;
                 case "8":
