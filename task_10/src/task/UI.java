@@ -1,7 +1,5 @@
 package task;
 
-import java.util.HashMap;
-import java.util.Objects;
 import java.util.Scanner;
 
 import static task.TypeDoc.*;
@@ -34,22 +32,22 @@ public class UI {
         Scanner scan = new Scanner(System.in);
         return scan.next();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         MangerOfDeals deals = new MangerOfDeals();
         commands();
         while (true) {
             switch (get("Введите номер команды (8 - повторить список команд):")) {
-                case "1" -> {
+                case "1":
                     String num = get("Введите номер договора:");
                     String date = get("Введите дату заключения договора:");
                     try {
-                        deals.careatedeal(date, num);
+                        deals.create_deal(date, num);
                     } catch (Exception e) {
                         print(e.getMessage());
                     }
                     print("Договор #" + num + " с датой заключения " + date + " создан");
-                }
-                case "2" -> {
+                    break;
+                case "2":
                     String number_of_deal = get("Введите номер договора:");
                     int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
                     int income = Integer.parseInt(get("Сумма платежа(коп.):"));
@@ -75,67 +73,63 @@ public class UI {
                         default:
                             print("Ошибка ввода");
                             break;
-                        break;
-                        case "3":
-                            String num3 = get("Введите номер договора:");
-                            if (deals.containsKey(num3) && !deals.get(num3).list_of_docs().isEmpty()) {
-                                print("Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                                for (PayDoc doc : deals.get(num3).list_of_docs()) {
-                                    print(doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
-
-                                }
-                            } else {
-                                print("Нет такого договора");
-                            }
-                            break;
-                        case "4":
-                            String num4 = get("Введите номер договора:");
-                            if (deals.containsKey(num4)) {
-                                print("Сумма платежей по договору(коп.):" + deals.get(num4).getSum());
-                            } else {
-                                print("Нет такого договора");
-                            }
-                            break;
-                        case "5":
-                            String num5 = get("Введите номер договора:");
-                            if (deals.containsKey(num5)) {
-                                int number_of_doc = Integer.parseInt(get("Введите номер платежа:"));
-                                String date = get("Введите дату платежа:");
-                                try {
-                                    deals.get(num5).delete_doc(number_of_doc, date);
-                                } catch (Exception e) {
-                                    print(e.getMessage());
-                                }
-                                print("Платеж удален");
-                            } else {
-                                print("Нет такого договора");
-                            }
-                            break;
-                        case "6":
-                            print("Номер договора | Сумма платежей по договору(коп)");
-                            for (String deal : deals.keySet()) {
-                                print(deal + " | " + deals.get(deal).getSum());
-                            }
-                            break;
-                        case "7":
-                            for (String deal : deals.keySet()) {
-                                if (!deals.get(deal).list_of_docs().isEmpty()) {
-                                    print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
-                                    for (PayDoc doc : deals.get(deal).list_of_docs()) {
-                                        print(deal + " | " + doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
-
-                                    }
-                                }
-                            }
-                            break;
-                        case "8":
-                            commands();
-                            break;
-                        default:
-                            print("Ошибка ввода");
-                            break;
                     }
+                    break;
+                case "3":
+                    String num3 = get("Введите номер договора:");
+                    print("Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
+                    try {
+                        for (PayDoc doc : deals.list_of_docs(num3)) {
+                            print(doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
+
+                        }
+                    }catch (Exception e) {
+                        print(e.getMessage());
+                    }
+                    break;
+                case "4":
+                    String num4 = get("Введите номер договора:");
+                    try {
+                        print("Сумма платежей по договору(коп.):" + deals.getSum(num4));
+                    }catch (Exception e) {
+                        print(e.getMessage());
+                    }
+                    break;
+                case "5":
+                    String num5 = get("Введите номер договора:");
+                    int number_of_doc5 = Integer.parseInt(get("Введите номер платежа:"));
+                    String date5 = get("Введите дату платежа:");
+                    try {
+                        deals.delete_doc(num5, number_of_doc5, date5);
+                    } catch (Exception e) {
+                        print(e.getMessage());
+                    }
+                    print("Платеж удален");
+                    break;
+                case "6":
+                    print("Номер договора | Сумма платежей по договору(коп)");
+                    for (String deal : deals.list_of_numbers_deals()) {
+                        print(deal + " | " + deals.getSum(deal));
+                    }
+                    break;
+                case "7":
+                    for (String deal : deals.list_of_numbers_deals()) {
+                        if (!deals.isEmpty(deal)) {
+                            print("Номер договора | Дата платежа | Тип платежа | Номер платежа | Сумма патежа(коп.) ");
+                            for (PayDoc doc : deals.list_of_docs(deal)) {
+                                print(deal + " | " + doc.getDate() + " | " + type(doc.getType()) + " | " + doc.getNumber() + " | " + doc.getIncome());
+
+                            }
+                        }
+                    }
+                    break;
+                case "8":
+                    commands();
+                    break;
+                default:
+                    print("Ошибка ввода");
+                    break;
                 }
             }
+        }
     }
-}
