@@ -7,17 +7,24 @@ import java.util.Objects;
 
 public class Deal {
     private String date;
+    private String number;
     private final HashMap<Integer, PayDoc> pay_doc;
-    public  Deal(String date){
-        this.date = date;
-        pay_doc = new HashMap<>();
+    public  Deal(String date, String number) throws Exception {
+        if(!Objects.equals(number, "")) {
+            this.date = date;
+            this.number = number;
+            pay_doc = new HashMap<>();
+        }
+        else{
+            throw new Exception("Ошибка неверный номер договора");
+        }
     }
     public void create_pay_doc(int income, int number, String date, TypeDoc type) throws Exception {
-        if(!(exists_of_doc(number)&& pay_doc.get(number).getType()==type&& Objects.equals(pay_doc.get(number).getDate(), date))){
+        if(!(exists_of_doc(number)&& pay_doc.get(number).getType()==type&& Objects.equals(pay_doc.get(number).getDate(), date))&&income>0){
             pay_doc.put(number, new PayDoc(income, number, date, type));
         }
         else{
-            throw new Exception("Ошибка договор уже есть");
+            throw new Exception("Ошибка договор уже есть или сумма платежа введена некоректно");
         }
     }
     public List<PayDoc> list_of_docs() {

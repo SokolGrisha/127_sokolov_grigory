@@ -34,12 +34,18 @@ public class Task_10 {
             switch (Integer.parseInt(get("Введите номер команды:"))) {
                 case 1:
                     String num = get("Введите номер договора:");
-                    if(!deals.containsKey(num)&& !Objects.equals(num, "")) {
+                    if(!deals.containsKey(num)) {
                         String date = get("Введите дату заключения договора:");
-                        deals.put(num,new Deal(date));
+                        try {
+                            deals.put(num, new Deal(date,num));
+                        }
+                        catch (Exception e){
+                            print(e.getMessage());
+                        }
                         print("Договор #" + num + " с датой заключения " + date + " создан");
                     }
                     else{
+                        //TODO придумать как поместить в класс?
                         print("!!! Ошибка !!!");
                         print("Договор с таким номером уже создан или номер договора не введен");
                     }
@@ -52,7 +58,6 @@ public class Task_10 {
                             int income = Integer.parseInt(get("Сумма платежа(в коп.):"));
                             if (income > 0) {
                                 String date = get("Дата платежа:");
-                                //TODO Сделать проверку по заданию
                                 print("Выберите тип платежа:");
                                 print("1.Платежное поручение");
                                 print("2.Банковский ордер");
