@@ -75,7 +75,7 @@ public class Test extends Assert {
         MangerOfDeals.create_pay_doc("1",1000, 1,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("1",2000, 2,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
-        MangerOfDeals.delete_doc("1",1,"20211219");
+        MangerOfDeals.delete_doc("1",1,"20220111");
         assertEquals(2, MangerOfDeals.getDeals().get("1").list_of_docs().size());
     }
 
@@ -101,8 +101,8 @@ public class Test extends Assert {
         MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
         MangerOfDeals.create_deal("20211219", "2");
         MangerOfDeals.create_pay_doc("2",1000, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",2000, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",3000, 1,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",2000, 2,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",3000, 3,"20220111", PaymentsDoc);
 
         List<Integer> payments = new ArrayList();
         payments.add(100);
@@ -124,8 +124,8 @@ public class Test extends Assert {
         MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
         MangerOfDeals.create_deal("20211219", "2");
         MangerOfDeals.create_pay_doc("2",1000, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",2000, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",3000, 1,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",2000, 2,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",3000, 3,"20220111", PaymentsDoc);
 
         List<Integer> payments = new ArrayList();
         payments.add(100);
@@ -144,8 +144,8 @@ public class Test extends Assert {
         MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
         MangerOfDeals.create_deal("20211219", "2");
         MangerOfDeals.create_pay_doc("2",1001, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",2002, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",3003, 1,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",2002, 2,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",3003, 3,"20220111", PaymentsDoc);
 
         List<String> contractsTest = new ArrayList();
         List<Integer> paymentsTest = new ArrayList();
