@@ -48,6 +48,13 @@ public class MangerOfDeals {
         }
         return list;
     }
+    public List<Integer> list_of_all_docs_income(){
+        List<Integer> list = new ArrayList();
+        for (PayDoc paydocs: list_of_all_docs()) {
+            list.add(paydocs.getIncome());
+        }
+        return list;
+    }
     public void delete_doc(String number_of_deal, int num_of_dec, String date) throws Exception{
         if(deals.containsKey(number_of_deal)) {
             try {

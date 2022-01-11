@@ -31,6 +31,13 @@ public class Deal {
         list.addAll(pay_doc.values());
         return list;
     }
+    public List<Integer> list_of_all_docs_income(){
+        List<Integer> list = new ArrayList();
+        for (PayDoc paydocs: pay_doc.values()) {
+            list.add(paydocs.getIncome());
+        }
+        return list;
+    }
     public int getSum(){
         int sum = 0;
         for(Object doc: pay_doc.keySet()){

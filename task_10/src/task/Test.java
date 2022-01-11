@@ -98,21 +98,21 @@ public class Test extends Assert {
         MangerOfDeals.create_deal("20211218", "1");
         MangerOfDeals.create_pay_doc("1",1000, 1,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("1",2000, 2,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("1",3000, 3,"20220111", PaymentsDoc);
         MangerOfDeals.create_deal("20211219", "2");
-        MangerOfDeals.create_pay_doc("2",1000, 1,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",2000, 2,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("2",3000, 3,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",1001, 1,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",2002, 2,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("2",3003, 3,"20220111", PaymentsDoc);
 
         List<Integer> payments = new ArrayList();
-        payments.add(100);
-        payments.add(200);
-        payments.add(300);
-        payments.add(311);
-        payments.add(211);
-        payments.add(111);
+        payments.add(1000);
+        payments.add(2000);
+        payments.add(3000);
+        payments.add(1001);
+        payments.add(2002);
+        payments.add(3003);
 
-        assertArrayEquals(payments.toArray(),MangerOfDeals.list_of_all_docs().toArray());
+        assertArrayEquals(payments.toArray(),MangerOfDeals.list_of_all_docs_income().toArray());
     }
 
     @org.junit.Test
@@ -121,18 +121,18 @@ public class Test extends Assert {
         MangerOfDeals.create_deal("20211218", "1");
         MangerOfDeals.create_pay_doc("1",1000, 1,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("1",2000, 2,"20220111", PaymentsDoc);
-        MangerOfDeals.create_pay_doc("1",2000, 3,"20220111", PaymentsDoc);
+        MangerOfDeals.create_pay_doc("1",3000, 3,"20220111", PaymentsDoc);
         MangerOfDeals.create_deal("20211219", "2");
         MangerOfDeals.create_pay_doc("2",1000, 1,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("2",2000, 2,"20220111", PaymentsDoc);
         MangerOfDeals.create_pay_doc("2",3000, 3,"20220111", PaymentsDoc);
 
         List<Integer> payments = new ArrayList();
-        payments.add(100);
-        payments.add(200);
-        payments.add(300);
+        payments.add(1000);
+        payments.add(2000);
+        payments.add(3000);
 
-        assertArrayEquals(payments.toArray(),MangerOfDeals.getDeals().get("1").list_of_docs().toArray());
+        assertArrayEquals(payments.toArray(),MangerOfDeals.getDeals().get("1").list_of_all_docs_income().toArray());
     }
 
     @org.junit.Test
@@ -152,7 +152,7 @@ public class Test extends Assert {
         contractsTest.add("1");
         paymentsTest.add(5000);
         contractsTest.add("2");
-        paymentsTest.add(5005);
+        paymentsTest.add(6006);
 
         HashMap<String,Integer> contractsWithPayments = MangerOfDeals.deals_and_paymonts();
         List<String> contracts = new ArrayList();
