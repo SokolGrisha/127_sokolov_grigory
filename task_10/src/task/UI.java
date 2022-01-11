@@ -1,5 +1,6 @@
 package task;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static task.TypeDoc.*;
@@ -90,7 +91,7 @@ public class UI {
                 case "4":
                     String num4 = get("Введите номер договора:");
                     try {
-                        print("Сумма платежей по договору(коп.):" + deals.getSum(num4));
+                        print("Сумма платежей по договору(коп.):" + deals.getDeals().get(num4).getSum());
                     }catch (Exception e) {
                         print(e.getMessage());
                     }
@@ -107,9 +108,15 @@ public class UI {
                     print("Платеж удален");
                     break;
                 case "6":
-                    print("Номер договора | Сумма платежей по договору(коп)");
-                    for (String deal : deals.list_of_numbers_deals()) {
-                        print(deal + " | " + deals.getSum(deal));
+                    HashMap<String, Integer> list = deals.deals_and_paymonts();
+                    if(!list.isEmpty()){
+                        print("Номер договора | Сумма платежей по договору(коп)");
+                        for (String deal : list.keySet()) {
+                            print(deal + " | " + list.get(deal));
+                        }
+                    }
+                    else {
+                        print("База данных пуста");
                     }
                     break;
                 case "7":

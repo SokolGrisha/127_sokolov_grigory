@@ -48,14 +48,6 @@ public class MangerOfDeals {
         }
         return list;
     }
-    public int getSum(String number) throws Exception{
-        if(deals.containsKey(number)) {
-            return deals.get(number).getSum();
-        }
-        else{
-            throw new Exception("Ошибка договор с таким номером не существует");
-        }
-    }
     public void delete_doc(String number_of_deal, int num_of_dec, String date) throws Exception{
         if(deals.containsKey(number_of_deal)) {
             try {
@@ -69,7 +61,7 @@ public class MangerOfDeals {
             throw new Exception("Ошибка попытка удалить несуществующий платеж");
         }
     }
-    public Set<String> list_of_numbers_deals(){
+    private Set<String> list_of_numbers_deals(){
         return deals.keySet();
     }
     public boolean isEmpty(String number) throws Exception{
@@ -80,5 +72,17 @@ public class MangerOfDeals {
             throw new Exception("Ошибка договор с таким номером не существует");
         }
     }
-
+    public HashMap<String, Deal> getDeals() {
+        return deals;
+    }
+    public int getDealsCount(){
+        return deals.size();
+    }
+    public HashMap<String, Integer> deals_and_paymonts(){
+        HashMap<String, Integer> list = new HashMap<>();
+        for (String deal : list_of_numbers_deals()) {
+            list.put(deal, deals.get(deal).getSum());
+        }
+        return list;
+    }
 }
